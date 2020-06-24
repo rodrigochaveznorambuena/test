@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "06c0b8f1-f00f-489a-8904-675579319b79",
+		"name": "prueba",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/init",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/init",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"init"
+					]
+				},
+				"description": "Enpoint utilizado para cargar datos de prueba en el servicio de emulación de base de datos.\r\n\r\nMetodo usado para acceder a este endpoint no esta limitado, se puede usar cualquier metodo."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Wallace",
+							"type": "text"
+						},
+						{
+							"key": "contrasena",
+							"value": "dYHEASDxo7m_oo0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Endpoint para inicio de sesion. Se debe añadir el campo \"nombre\" y \"contrasena\" para poder validar los datos.\r\nLos datos deben ser enviados como \"form-data\" o \"x-wwww-form-urlencoded\" y utlizando el metodo \"POST\".\r\nEl retorno de este endpoint es el token en caso de login exitoso o alerta de falla en caso de que las credenciales no sean encontradas"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/agent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/agent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"agent"
+					]
+				},
+				"description": "Enpoint utilizado para la creacion de agentes. Se debe usar el metodo \"POST\" y retorna un usuario nuevo creado"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/issues",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/issues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"issues"
+					]
+				},
+				"description": "Enpoint que trae todas las incidencias segun el formato planteado. Utiliza el metodo \"GET\""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/issue",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTI5NzIwMDQsIm5iZiI6MTU5Mjk3MjAwNCwianRpIjoiZGE5MjRjZDItMjBjNC00MWViLTg2MzItODU0OGYwZjRlYTAyIiwiZXhwIjoxNTkyOTcyOTA0LCJpZGVudGl0eSI6IjEiLCJmcmVzaCI6ZmFsc2UsInR5cGUiOiJhY2Nlc3MifQ.lr7pueJYqFSgr9nvFfhBWHJq8QaoSPdGWgEdg5ouoSY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/issue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"issue"
+					]
+				},
+				"description": "Enpoint usado para crear una incidencia asociada al usuario. Para acceder a este enpoint se debe acceder mediate el uso del token usando el estadar JWT. Este token es retornado cuando se inicia sesión de forma correcta y se debe enviar en la cabecera (header) \"Authorization\" con el siguiente formato (sin comillas): \"Bearer e...\" donde \"e...\" es el token nombrado anteriormente, sino no se podra acceder a el.\r\nRetorna la incidencia creada."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
