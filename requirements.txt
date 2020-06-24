@@ -1,0 +1,5 @@
+venv
+Flask
+python-dotenv
+requests
+flask_jwt_extended
