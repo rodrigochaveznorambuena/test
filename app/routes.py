@@ -1,14 +1,23 @@
-# -*- coding: utf-8 -*-
 import requests as API
 from flask import request
 from flask import current_app as app
 from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity
+    JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
 from flask import jsonify
-
 jwt = JWTManager(app)
+
+@app.route('/init')
+def init():
+    for i in range(5):
+        API.post('{}agent'.format(app.config.get('URL_API')))
+    
+    for i in range(5):
+        API.post('{}agent/{}/issue'.format(app.config.get('URL_API'), i+1))
+    
+    return {
+        'message': 'Datos cargados'
+    }
 
 @app.route('/login', methods = ['POST'])
 def login():
@@ -23,7 +32,6 @@ def login():
         for agente in agentes:
             if agente.get('nombre') == nombre and agente.get('contrasena') == contrasena:
                 existe = True
-                usuario = agente
                 break
 
         if existe:
@@ -32,14 +40,14 @@ def login():
             }
         else:
             retorno = {
-                'codigo': -1,
-                'mensaje': 'Usuario no existe o pass incorrecta'
+                'code': -1,
+                'message': 'Usuario no existe o contraseña incorrecta'
             }
     except Exception as e:
         app.logger.info('ERROR: {}'.format(e))
         retorno = {
-            'codigo': -1,
-            'mensaje': 'Error al acceder a los datos'
+            'code': -1,
+            'message': 'Error al acceder a los datos'
         }
 
     return retorno
@@ -52,8 +60,8 @@ def agent():
     except Exception as e:
         app.logger.info('ERROR: {}'.format(e))
         retorno = {
-            'codigo': -1,
-            'mensaje': 'Error al acceder a los datos'
+            'code': -1,
+            'message': 'Error al acceder a los datos'
         }
 
     return retorno
@@ -68,8 +76,8 @@ def issue():
     except Exception as e:
         app.logger.info('ERROR: {}'.format(e))
         retorno = {
-            'codigo': -1,
-            'mensaje': 'Error al acceder a los datos'
+            'code': -1,
+            'message': 'Error al acceder a los datos'
         }
 
     return retorno
@@ -96,8 +104,8 @@ def issues():
     except Exception as e:
         app.logger.info('ERROR: {}'.format(e))
         retorno = {
-            'codigo': -1,
-            'mensaje': 'Error al acceder a los datos'
+            'code': -1,
+            'message': 'Error al acceder a los datos'
         }
 
     return jsonify(retorno)
