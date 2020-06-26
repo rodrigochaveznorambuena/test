@@ -1,10 +1,9 @@
 import requests as API
-from flask import request
-from flask import current_app as app
+from flask import current_app as app, jsonify, request
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token, get_jwt_identity
 )
-from flask import jsonify
+
 jwt = JWTManager(app)
 
 @app.route('/init')
